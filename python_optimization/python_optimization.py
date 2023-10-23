@@ -4,7 +4,7 @@
 # Notes:
 # - line_profiler is used for relative speeds of lines, but slows down the overall execution, that's why iteration speed is measured separately
 
-# In[4]:
+# In[ ]:
 
 
 import math
@@ -21,7 +21,7 @@ import line_profiler
 MAX_ITER = 1000
 
 
-# In[5]:
+# In[ ]:
 
 
 data = pd.read_json("data-large.json")
@@ -58,7 +58,7 @@ def profile_func(outer_func, func_to_profile) -> str:
 
 # # Original
 
-# In[223]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -104,7 +104,7 @@ print(
 
 # ## Optimisation 1
 
-# In[225]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -156,7 +156,7 @@ print(
 
 # ## Optimisation 2
 
-# In[226]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -207,7 +207,7 @@ print(
 
 # ## Optimisation 3
 
-# In[227]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -257,7 +257,7 @@ print(
 
 # ## Optimisation 4
 
-# In[228]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -312,7 +312,7 @@ print(
 
 # ## Optimisation 5
 
-# In[230]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -370,7 +370,7 @@ print(
 
 # ## Optimisation 6
 
-# In[231]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -431,7 +431,7 @@ print(
 
 # ## Optimisation 7
 
-# In[232]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -507,7 +507,7 @@ print(
 
 # ## Optimisation 8
 
-# In[235]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -570,7 +570,7 @@ print(
 
 # ## Optimisation 9
 
-# In[236]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -647,7 +647,7 @@ print(
 
 # ## Optimisation 10
 
-# In[256]:
+# In[ ]:
 
 
 def k_corrset(data, K, max_iter=1000):
@@ -727,7 +727,7 @@ print(
 
 # ## Optimization 11
 
-# In[258]:
+# In[ ]:
 
 
 @numba.njit(boundscheck=False, fastmath=True, nogil=True)
@@ -837,7 +837,7 @@ print(
 
 # ## Optimization 12
 
-# In[269]:
+# In[ ]:
 
 
 @numba.njit(boundscheck=False, fastmath=True, nogil=True)
@@ -915,11 +915,10 @@ def compute_corrs(qs_combinations, users_who_answered_q, score_matrix, grand_tot
             if bitset[idx] != 0:
                 for pos in range(64):
                     if (bitset[idx] & (np.int64(1) << np.int64(pos))) != 0:
-                        user_idx = idx * 64 + pos
                         score_for_qs = 0.0
                         for q in qs_combinations[i]:
-                            score_for_qs += score_matrix[user_idx, q]
-                        score_for_user = grand_totals[user_idx]
+                            score_for_qs += score_matrix[idx * 64 + pos, q]
+                        score_for_user = grand_totals[idx * 64 + pos]
                         n += 1.0
                         sum_a += score_for_qs
                         sum_b += score_for_user
