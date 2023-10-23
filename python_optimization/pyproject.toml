@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "python-optimization"
+authors = ["sradc <sidneyradcliffe@sky.com>"]
+version = "0.1.0"
+description = ""
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+ipykernel = "^6.25.2"
+numpy = "^1.26.1"
+pandas = "^2.1.1"
+tqdm = "^4.66.1"
+black = {extras = ["jupyter"], version = "^23.10.0"}
+line-profiler = "^4.1.1"
+scipy = "^1.11.3"
+numba = "^0.58.1"
+cython = "^3.0.4"
+nbconvert = "^7.9.2"
+jupyter-contrib-nbextensions = "^0.7.0"
+notebook = "6.4.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
